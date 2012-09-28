@@ -39,15 +39,20 @@ module Dickens
     class << self
       def find(word)
         word.to_s
-        invoke(word)
+        command = [@@executable, prepare_options, word].join(" ")
+        invoke(command).join
+      end
+
+      def list
+        command = [@@executable, "--list-dicts"].join(" ")
+        puts invoke(command)
       end
 
       protected
 
-      def invoke(word)
-        command = [@@executable, prepare_options, word].join(" ")
+      def invoke(command)
         stdin, stdout, stderr = Open3.popen3(command)
-        return stdout.readlines.join
+        return stdout.readlines
       end
 
       def prepare_options
