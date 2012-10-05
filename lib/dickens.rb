@@ -1,4 +1,5 @@
 require "dickens/version"
+require "dickens/list_items"
 
 require 'rbconfig'
 require RbConfig::CONFIG['target_os'] == 'mingw32' && !(RUBY_VERSION =~ /1.9/) ? 'win32/open3' : 'open3'
@@ -38,14 +39,12 @@ module Dickens
 
     class << self
       def find(word)
-        word.to_s
-        command = [@@executable, prepare_options, word].join(" ")
+        command = [@@executable, prepare_options, word.to_s].join(" ")
         invoke(command).join
       end
 
       def list
-        command = [@@executable, "--list-dicts"].join(" ")
-        puts invoke(command)
+        Dickens::ListItem.parse invoke([@@executable, "--list-dicts"].join(" "))
       end
 
       protected
