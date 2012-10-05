@@ -40,7 +40,7 @@ module Dickens
     class << self
       def find(word)
         command = [@@executable, prepare_options, word.to_s].join(" ")
-        invoke(command).join
+        invoke(command).join("")
       end
 
       def list
