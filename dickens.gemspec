@@ -5,11 +5,11 @@ require "dickens/version"
 Gem::Specification.new do |s|
   s.name        = "dickens"
   s.version     = Dickens::VERSION
-  s.authors     = ["prikha"]
+  s.authors     = ["Sergey Prikhodko"]
   s.email       = ["sergey@zengile.com"]
   s.homepage    = "http://github.com/prikha/dickens"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = "Dickens if for offline dictionaries lookup. It is built upon SDCV (StarDict console version)"
+  s.description = "For now you can gather all your dictionaries together and search through them getting pretty rails-style records back"
 
   s.rubyforge_project = "dickens"
 
