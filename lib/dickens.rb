@@ -1,5 +1,6 @@
 require "dickens/version"
 require "dickens/list_items"
+require "dickens/find_items"
 
 require 'rbconfig'
 require RbConfig::CONFIG['target_os'] == 'mingw32' && !(RUBY_VERSION =~ /1.9/) ? 'win32/open3' : 'open3'
@@ -11,6 +12,17 @@ begin
 rescue LoadError
   require 'active_support/core_ext/blank'
 end
+
+class Object
+  ##
+  #   @person ? @person.name : nil
+  # vs
+  #   @person.try(:name)
+  def try(method)
+    send method if respond_to? method
+  end
+end
+
 
 module Dickens
   class StarDict
@@ -25,7 +37,7 @@ module Dickens
     cattr_accessor :config, :executable
 
 
-    #Использование:
+    ##Использование:
     #    sdcv [ПАРАМЕТР...]  words
     #
     #Параметры приложения:
@@ -40,7 +52,21 @@ module Dickens
     class << self
       def find(word)
         command = [@@executable, prepare_options, word.to_s].join(" ")
-        invoke(command).join("")
+        status, *response = invoke(command)
+        puts status
+        Dickens::FindItem.parse(response.join(""), word)
+      end
+
+      def where(word, dictionaries=[])
+        return find(word) if dictionaries.empty? or !dictionaries.is_a?(Array)
+        cache=@@config
+        result=[]
+        dictionaries.each do |d|
+          @@config[:use_dict] = d.try(:name) || d
+          result+= find(word)
+        end
+        @@config=cache
+        result
       end
 
       def list
@@ -56,8 +82,7 @@ module Dickens
 
       def prepare_options
         raise WrongFormatError unless @@config.is_a? Hash
-        options = normalize_options(@@config)
-        options.flatten
+        normalize_options(@@config).flatten
       end
 
       def normalize_options(options)
@@ -75,12 +100,9 @@ module Dickens
       end
 
       def normalize_value(value)
-        value.is_a?(TrueClass) ? nil : value.to_s
+        value.is_a?(TrueClass) ? nil : "\"#{value.to_s}\""
       end
 
     end
-
-
-
   end
 end
