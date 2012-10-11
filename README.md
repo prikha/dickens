@@ -1,3 +1,14 @@
 #Dickens
-## is for dictionaries
-TODO: write some readme
+
+## SDCV installation
+
+## API methods
+### List
+
+### Find
+
+### Where
+
+### Configuration
+
+
