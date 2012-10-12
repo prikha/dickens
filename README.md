@@ -1,4 +1,5 @@
 #Dickens
+Dickens is made to work with great collections of StarDict Dictionaries - simple ruby wrapper around SDCV.
 
 `gem install dickens`
 
@@ -13,7 +14,7 @@
 In Mac OS it is possible to install SDCV using Ports:
 
 ```sh
-  port install sdcv
+  sudo port install sdcv
 ```
 
 ### Dictionaries
@@ -21,8 +22,14 @@ Lots of dics may be found across the net. The starting point may be (here)[http:
 #### Install dictionaries on Linux
 
 ```sh
-  tar -xjvf a.tar.bz2
-  mv a /usr/share/stardict/dic
+  sudo tar -xvzf downlaoded.tar.gz -C /usr/share/stardict/dic
+```
+
+#### Install dictionaries on Mac OS
+
+```sh
+mkdir -p $HOME/.stardict/dic
+sudo tar -xvjf downloaded.tar.bz2 -C $HOME/.stardict/dic
 ```
 
 ## API methods
