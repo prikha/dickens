@@ -11,6 +11,10 @@ module Dickens
     }
     cattr_accessor :config, :executable
 
+    def self.config(hash)
+      @@config.merge!(hash)
+    end
+
     ##Использование:
     #    sdcv [ПАРАМЕТР...]  words
     #
