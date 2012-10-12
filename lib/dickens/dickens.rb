@@ -11,7 +11,6 @@ module Dickens
     }
     cattr_accessor :config, :executable
 
-
     ##Использование:
     #    sdcv [ПАРАМЕТР...]  words
     #

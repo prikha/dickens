@@ -1,7 +1,4 @@
 require "dickens/version"
-require "dickens/dickens"
-require "dickens/list_items"
-require "dickens/find_items"
 
 require 'rbconfig'
 require RbConfig::CONFIG['target_os'] == 'mingw32' && !(RUBY_VERSION =~ /1.9/) ? 'win32/open3' : 'open3'
@@ -13,6 +10,10 @@ begin
 rescue LoadError
   require 'active_support/core_ext/blank'
 end
+
+require "dickens/dickens"
+require "dickens/list_items"
+require "dickens/find_items"
 
 class Object
   ##
