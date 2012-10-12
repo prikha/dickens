@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "dickens"
   s.version     = Dickens::VERSION
   s.authors     = ["Sergey Prikhodko"]
-  s.email       = ["sergey@zengile.com"]
+  s.email       = ["prikha@gmail.com"]
   s.homepage    = "http://github.com/prikha/dickens"
   s.summary     = "Dickens if for offline dictionaries lookup. It is built upon SDCV (StarDict console version)"
   s.description = "For now you can gather all your dictionaries together and search through them getting pretty rails-style records back"
